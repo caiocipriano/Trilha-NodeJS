@@ -1,0 +1,5 @@
+const data1 = new Date()
+const data2 = new Date('May 08 2022 09:30')
+data2.setMonth(07)
+data2.setFullYear(1907)
+console.log(data2)
