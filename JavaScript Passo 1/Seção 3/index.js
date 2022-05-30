@@ -25,6 +25,16 @@ app.get("/loja/:item?", function(req,res){
     
 })
 
+//QueryParam
+app.get("/contato/midia", function(req,res){
+    const rede= req.query["rede"]
+    if(rede){
+        res.send("<h2>Nosso: "+rede+" www.com.br</h2>")
+    }else{
+        res.send("<h2>Não possuimos essa Rede ou não Existe</h2>")
+    }
+})
+
 
 
 //Fica Por Ultimo
