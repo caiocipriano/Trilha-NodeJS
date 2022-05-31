@@ -26,10 +26,9 @@ app.use(bodyParser.json())
 app.get("/", (req,res)=>{
     AskModel.findAll({raw:true}).then(asks=>{
         res.render('index',{
-            asks:asks
+            ask:asks
         })
     })
-    res.render('index') //Pagina principal
 })
 
 app.get("/ask", (req,res)=>{
