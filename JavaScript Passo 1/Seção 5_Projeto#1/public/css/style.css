@@ -1,6 +1,4 @@
-h1{
-    color:blue;
-}
+
 label{
     margin-top:1rem ;
 }
@@ -13,6 +11,6 @@ label{
     width: 5vh;
 }
 
-.ask__container{
-    
+.card{
+    margin-top: 1rem;
 }
