@@ -1,0 +1,23 @@
+<%- include('../partials/header.ejs')%>
+<body>   
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Realize uma pergunta</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/saveAsk">
+                    <label for="">Título</label>
+                    <input type="text" class="form-control" name ="title" placeholder="Título">
+                    <label for="">Descrição</label>
+                    <input type="text" class="form-control" name="description" placeholder="Descrição...">
+                    <br>
+                    <button class="btn btn-primary">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+<%- include('../partials/footer.ejs')%>       
+
+ 
