@@ -1,0 +1,51 @@
+<%-include ('../../../partials/header.ejs')%>
+<body>
+    <%-include ('../../../partials/navbar.ejs')%>
+    <div class="container">
+        <hr>
+        <h2>Categorias</h2>
+        <hr>
+        <a class="btn btn-success" href="/admin/categories/new">Cadastrar categoria</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%categories.forEach(categories =>{ %>
+                    <tr>
+                        <th><%=categories.id%></th>
+                        <th><%=categories.title%></th>
+                        <th><%=categories.slug%></th>
+                        <th>
+                            <button class="btn btn-warning">Editar</button>
+                           
+                            <form method="POST" action="/categories/delete" style="display:inline;" onsubmit="confirmDelete(event,this)">
+                                <input type="hidden" name="id" value="<%=categories.id%>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </th>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        const descision = confirm("Deseja deletar?")
+        if(descision){
+            form.submit()
+        }else{
+            console.log("Não Deletado")
+        }
+    }
+</script>
+<%- include('../../../partials/footer.ejs')%>    
