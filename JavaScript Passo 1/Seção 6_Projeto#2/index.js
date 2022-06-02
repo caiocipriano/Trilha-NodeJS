@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const connection = require('./database/database')
+const categoriesController = require('./categories/categoriesController')
+const articleController = require('./articles/ArticlesController')
 
 //Templates
 app.set('view engine', 'ejs');
@@ -11,6 +13,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
 
+//Database Connection
 connection
           .authenticate()
           .then(()=>{
@@ -19,8 +22,11 @@ connection
               console.log(erro)
           })
 
+//Rotas Express
+app.use("/", categoriesController)
+app.use("/", articleController)
 
-
+//Main Page
 app.get("/", (req,res)=>{
     res.render("index")
 })
