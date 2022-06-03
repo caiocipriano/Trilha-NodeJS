@@ -1,0 +1,26 @@
+<%-include ('../../../partials/header.ejs')%>
+<body>
+    <%-include ('../../../partials/navbar.ejs')%>
+    <div class="container"><br>
+        <div class="card">
+            <div class="card-header">
+                <h2>Novo Artigo</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    <input class="form-control" type="text" name="title" placeholder="Digite o titulo do artigo..."><br>
+                    <textarea class="form-control"  id="article" placeholder="Digite o artigo..." name="body"></textarea><br>
+                    <button class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+            
+        </div> 
+    </div>
+</body>
+<%- include('../../../partials/footer.ejs')%>   
+<script src="/tinymce/tinymce.min.js"></script> 
+<script>
+    tinymce.init({
+        selector:"#article"
+    })
+</script>
