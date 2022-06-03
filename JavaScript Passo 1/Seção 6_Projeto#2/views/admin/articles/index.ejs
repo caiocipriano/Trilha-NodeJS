@@ -17,9 +17,24 @@
                     <th>Ações</th>
                 </tr>
             </thead>
+            <tbody>
+                <%articles.forEach(articles =>{%>
+                    <tr>
+                        <th><%=articles.id%></th>
+                        <th><%=articles.title%></th>
+                        <th><%=articles.slug %></th>
+                        <th><%=articles.category.title%></th>
+                        <td>
+                            <form method="POST" action="/articles/delete" onsubmit="confirmDelete(event,this)">
+                                <input type="hidden" name="id" value="<%=articles.id%>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% })%>
+            </tbody>
         </table>
     </div>
-
 </body>
 <script>
     function confirmDelete(event, form){

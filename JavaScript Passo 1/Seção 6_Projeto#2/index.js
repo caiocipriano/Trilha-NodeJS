@@ -6,8 +6,8 @@ const connection = require('./database/database')
 const categoriesController = require('./categories/categoriesController')
 const articleController = require('./articles/ArticlesController')
 
-const articleModel = require("./articles/Article")
-const categoryModel = require("./categories/Category")
+const Article = require("./articles/Article")
+const Category = require('./categories/Category')
 
 
 //Templates
@@ -33,8 +33,29 @@ app.use("/", articleController)
 
 //Main Page
 app.get("/", (req,res)=>{
-    res.render("index")
+    Article.findAll({
+        include:[{model:Category}]
+    }).then(articles =>{
+        res.render("index",{articles:articles})
+    })
 })
+
+
+app.get("/:slug", (req,res)=>{
+    const slug = req.params.slug;
+    Article.findOne({
+        where:{slug:slug}
+    }).then(articles=>{
+        if(articles!=undefined){
+            res.render("")
+        }else{
+            res.render("/")
+        }
+    }).catch(erro=>{
+        res.render("/")
+    })
+})
+
 
 app.listen("8080", ()=>{
     console.log("O servidor está rodado!")

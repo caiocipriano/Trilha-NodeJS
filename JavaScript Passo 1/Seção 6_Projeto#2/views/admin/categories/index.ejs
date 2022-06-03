@@ -22,6 +22,7 @@
                         <th><%=categories.id%></th>
                         <th><%=categories.title%></th>
                         <th><%=categories.slug%></th>
+                        <th>Ações</th>
                         <th>
                             <a href="/admin/categories/edit/<%=categories.id%>" class="btn btn-warning">Editar</a>
                            
@@ -35,7 +36,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 <script>
     function confirmDelete(event, form){

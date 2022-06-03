@@ -52,6 +52,8 @@ router.post("/categories/delete", (req,res)=>{
     
 })
 
+
+//Pagina de edição de Categoria
 router.get("/admin/categories/edit/:id", (req,res)=>{
     const id = req.params.id;
 
@@ -70,7 +72,7 @@ router.get("/admin/categories/edit/:id", (req,res)=>{
     
 })
 
-
+//Post de Editar
 router.post("/categories/update", (req,res)=>{
     const id = req.body.id
     const title = req.body.title
