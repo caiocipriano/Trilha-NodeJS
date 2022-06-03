@@ -1,0 +1,35 @@
+<%-include ('../../../partials/header.ejs')%>
+<body>
+    <%-include ('../../../partials/navbar.ejs')%>
+    <div class="container">
+        <hr>
+        <h2>Artigos</h2>
+        <hr>
+        <a class="btn btn-success" href="/admin/articles/new">Cadastrar Artigo</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</body>
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        const descision = confirm("Deseja deletar?")
+        if(descision){
+            form.submit()
+        }else{
+            console.log("Não Deletado")
+        }
+    }
+</script>
+<%- include('../../../partials/footer.ejs')%>    
