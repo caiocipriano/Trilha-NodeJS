@@ -5,9 +5,12 @@ const connection = require('./database/database')
 
 const categoriesController = require('./categories/categoriesController')
 const articleController = require('./articles/ArticlesController')
+const userController = require('./user/UserController')
 
 const Article = require("./articles/Article")
 const Category = require('./categories/Category')
+const User = require('./user/User')
+
 
 
 //Templates
@@ -30,6 +33,8 @@ connection
 //Rotas Express
 app.use("/", categoriesController)
 app.use("/", articleController)
+app.use("/", userController)
+
 
 //Main Page
 app.get("/", (req,res)=>{
