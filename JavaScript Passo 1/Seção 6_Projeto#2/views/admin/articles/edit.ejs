@@ -8,6 +8,7 @@
             </div>
             <div class="card-body">
                 <form method="POST" action="/articles/update">
+                    <input type="hidden" value="<%=articles.id%>" name="id">
                     <input class="form-control" type="text" name="title" value="<%=articles.title%>"><br>
                     <textarea class="form-control" name="body" id="article"></textarea>
                     <select name="category" class="form-control"> 
