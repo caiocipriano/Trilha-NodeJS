@@ -57,25 +57,22 @@ router.post("/articles/delete", (req,res)=>{
 //Paginação da edição de artigo
 router.get("/admin/articles/edit/:id",(req,res)=>{ 
     const id = req.params.id
-    if(isNaN(id)){
-        res.redirect("/admin/articles")
-    }
     Article.findByPk(id).then(article=>{
         if(article!=undefined){
             Category.findAll().then(categories=>{
                 res.render("admin/articles/edit",{categories:categories})
             })
         }else{
-            res.redirect("/admin/articles")
+            res.redirect("/")
         }
     }).catch(erro=>{
-        res.redirect("/admin/articles")
+        res.redirect("/")
     })
 })
 
 //Edição de Artigo
 
-router.post("/admin/articles/update", (req,res)=>{
+/*router.post("/admin/articles/update", (req,res)=>{
     Article.update(
         {title:title,
         body:body,
@@ -83,5 +80,5 @@ router.post("/admin/articles/update", (req,res)=>{
         {where:{id:id}}).then(()=>{
             res.redirect("admin/articles")
         })
-})
+})*/
 module.exports=router

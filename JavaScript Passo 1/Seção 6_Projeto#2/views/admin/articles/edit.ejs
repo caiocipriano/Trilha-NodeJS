@@ -8,17 +8,15 @@
             </div>
             <div class="card-body">
                 <form method="POST" action="/articles/update">
-                    <input class="form-control" type="text" name="title" value="<%=article.title%>"><br>
-                    <textarea class="form-control" name="body" id="article" value=""></textarea>
-                    <label for="">Categoria</label>
+                    <input class="form-control" type="text" name="title" value="<%=articles.title%>"><br>
+                    <textarea class="form-control" name="body" id="article"></textarea>
                     <select name="category" class="form-control"> 
                         <%categories.forEach((category)=>{%>
-                            <%if(category.id==article.categoryId){%>    
+                            <%if(category.id==articles.categoryId){%>
                                 <option value="<%=category.id%>"selected><%=category.title%></option>
-                            <%} else{%>
+                            <%}else{%>
                                 <option value="<%=category.id%>"><%=category.title%></option>
                             <%}%>
-
                         <%})%>
                     </select>
                     <button class="btn btn-primary">Editar</button>
