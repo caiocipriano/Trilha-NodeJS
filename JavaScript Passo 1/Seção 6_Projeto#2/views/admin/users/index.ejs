@@ -1,0 +1,37 @@
+<%-include ('../../../partials/header.ejs')%>
+<body>
+    <%-include ('../../../partials/navbar.ejs')%>
+    <div class="container">
+        <hr>
+        <h2>Usuários</h2>
+        <hr>
+        <a class="btn btn-success" href="/admin/users/create">Cadastrar Usuario</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%users.forEach(users =>{ %>
+                    <td><%=users.id%></td>
+                    <td><%=users.email%></td>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        const descision = confirm("Deseja deletar?")
+        if(descision){
+            form.submit()
+        }else{
+            console.log("Não Deletado")
+        }
+    }
+</script>
+<%- include('../../../partials/footer.ejs')%>    
