@@ -43,10 +43,10 @@ router.post("/user/create",(req,res)=>{
       res.redirect("/admin/users/create")
     }
   })
-
-
-
 })
 
- 
+ router.get("/logout",(req,res)=>{
+   req.session.user=undefined;
+   res.redirect("/")
+ })
  module.exports=router
