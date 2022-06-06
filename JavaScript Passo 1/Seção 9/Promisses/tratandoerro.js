@@ -30,21 +30,12 @@ function enviarEmail(corpo,para){
 
 
 async function principal(){
-
     var id = await pegarId()
     var busca = await buscarEmail()
-    enviarEmail()
-
+   try{ 
+       enviarEmail()
+    }catch(erro){
+        console.log(erro)
+    }
 }
  principal()
-
-
-/*pegarId().then((id)=>{
-    buscarEmail(id).then((email)=>{
-        enviarEmail("Ola como vai?", email).then(()=>{
-            console.log("Email enviado"+id)
-        }).catch(()=>{
-            console.log("Erro")
-        })
-    })
-})*/
