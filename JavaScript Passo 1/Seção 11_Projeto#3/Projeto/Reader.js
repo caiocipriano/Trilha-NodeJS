@@ -10,7 +10,12 @@ class Reader{
     }
 
     async Reader(filepath){
-        return await this.reader(filepath,"utf-8")
+        try {
+            return await this.reader(filepath,"utf-8")
+
+        } catch (error) {
+            return undefined
+        }
     }
 
     //CallBack
