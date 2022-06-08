@@ -1,10 +1,37 @@
 const express= require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const jwt = require("jsonwebtoken")
+
+const jwtSecret = "abc"
 
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+
+function auth(req,res,next){
+  var authToken = req.headers['authorization'];
+
+  if(authToken!=undefined){
+    const bearer = authToken.split(' ')
+    const token = bearer[1]
+
+    jwt.verify(token, jwtSecret,(erro,data)=>{
+      if(erro){
+        res.status(401)
+      }else{
+        req.token=token;
+        req.loggedUser={id:data.id,email:data.email}
+        req.empresa="Udemy"
+        next()
+      }
+    })
+
+  }else{
+
+  }
+ 
+}
 
 var database={
     games:[
@@ -28,11 +55,12 @@ var database={
         }
     ],
     users:[{
-
+        email:"Caio@udemy.com",
+        idade:19
     }]
 }
 
-app.get("/games",(req,res)=>{
+app.get("/games",auth,(req,res)=>{
     res.json(database.games)
 })
 
@@ -131,7 +159,35 @@ app.put("/game/:id",(req,res)=>{
     }
 })
 
+//Veridicando Usuario
+app.post("/game",(req,res)=>{
+  var {email,senha} = req.body;
 
+  if(email!=undefined){
+
+      var user = database.users.find(user=>user.email==email)
+
+      if(user!=undefined){
+          if(user.password ==password){
+            jwt.sign({id:user.id,email:user.email}, jwtSecret,{expiresIn:"48h"},(erro,token)=>{
+              if(erro){
+                res.status(400)
+              }else{
+                res.status(200)
+              }
+            })
+          }else{
+            res.status(401)
+          }
+      }else{
+        res.status(404)
+      }
+
+  }else{
+    res.status(400)
+  }
+
+})
 
 app.listen(8080, erro=>{
     if(erro){
