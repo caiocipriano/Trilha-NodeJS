@@ -26,7 +26,10 @@ var database={
             ano:2015,
             preco:20
         }
-    ]
+    ],
+    users:[{
+
+    }]
 }
 
 app.get("/games",(req,res)=>{
