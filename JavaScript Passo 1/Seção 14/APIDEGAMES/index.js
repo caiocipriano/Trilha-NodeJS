@@ -60,7 +60,31 @@ var database={
     }]
 }
 
-app.get("/games",auth,(req,res)=>{
+app.get("/games",(req,res)=>{
+    var HATEOAS = [
+        {
+            href:"http://localost:8080/game/"+id,
+            method:"DELETE",
+            rel:"delete_game"
+        },
+        {
+            href:"http://localost:8080/game/0",
+            method:"GET",
+            rel:"get_games"
+        },
+        {
+            href:"http://localost:8080/auth",
+            method:"POST",
+            rel:"login"
+        }
+        
+    ]
+
+    res.json({games:database.games, _links})
+})
+
+
+app.get("/games",(req,res)=>{
     res.json(database.games)
 })
 
