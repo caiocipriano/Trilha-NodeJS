@@ -23,6 +23,22 @@ app.get('/movies', async (req, res) => {
   })
 
 
+ //Inserindo um Filme
+ app.post(`/movie`,async (req,res) => {
+    const {title,year,time,nameTitle} = req.body
+    const result = await prisma.movie.create({
+        data:{
+            title,
+            year,
+            time,
+            categorie:{connect:{name:nameTitle}} /*Atributo referencia do pris, connect
+                                                  name é a refencia nameTitle a variavel                            */
+        }
+    })
+    res.json(result)
+ }) 
+
+
 
 //Categorias
 //Listando Categorias e seus filmes
@@ -31,6 +47,14 @@ app.get("/categories",async (req,res) => {
         include:{movies:true}
     })
     res.json(categories)
+})
+
+//Inserindo um categoria
+app.post(`/categorie`,async (req,res) => {
+    const result = await prisma.categorie.create({
+        data:{...req.body}
+    })
+    res.json(result)
 })
 
 
