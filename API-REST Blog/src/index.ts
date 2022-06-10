@@ -13,6 +13,7 @@ app.get('/movies', async (req, res) => {
     res.json(movie)
   })
 
+//Buscando um filme pelo ID
   app.get(`/movie/:id`, async (req,res) => { //Uso da crase na mina Rota
     const {id} = req.params  
     const movie = await prisma.movie.findFirst({
