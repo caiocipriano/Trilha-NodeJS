@@ -50,32 +50,16 @@ export class MovieService{
         response.json(movie)
       }
 
+      async deleteMovie(requeste:Request, response:Response) {
+            const {id} = requeste.params
+            const movie = await prisma.movie.delete({
+                where:{Id:Number(id)}
+            })
+
+        response.json(movie)
+      }
+
 }
 
- //Atualizando um Filme
- app.put('/movie/:id', async (req, res) => {
-    const { id } = req.params
-    const {title,year,time, nameTitle} = req.body
-    const movie = await prisma.movie.update({
-      where: { Id: Number(id) },
-      data: {
-        title,
-        year,
-        time,
-        categorie:{connect:{name:nameTitle}}
-       },
-    })
-    res.json(movie)
-  })
-
-
-//Removendo um filme
-app.delete(`/movie/:id`, async(req,res)=>{
-    const {id} = req.params
-    const movie = await prisma.movie.delete({
-        where:({Id:Number(id)})
-    })
-    res.json(movie)
-})
 
 

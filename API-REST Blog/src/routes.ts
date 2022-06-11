@@ -11,6 +11,11 @@ router.get("/movies", movieController.findAll)
 router.get("/movie/:id", movieController.findOne)
 router.post("/movie", movieController.insertMovie)
 router.put("/movie/:id", movieController.updateMovie)
+router.delete("/movie/:id", movieController.deleteMovie)
+
+
+
+
 
 export {router};
 

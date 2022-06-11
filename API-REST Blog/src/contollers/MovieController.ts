@@ -24,4 +24,9 @@ export class MovieController{
         const movie = new MovieService()
         movie.updateMovie(requeste,response)
      }
+
+     async deleteMovie(requeste:Request, response:Response){
+        const movie = new MovieService()
+        movie.deleteMovie(requeste,response)
+     }
 }
