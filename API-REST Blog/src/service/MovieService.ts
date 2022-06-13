@@ -10,15 +10,15 @@ app.use(express.json())
 //Filmes
 //Listando todos os Filmes e a categoria é exibida com o id
 export class MovieService{
-    async findAll (request:Request, response:Response)  {
-      try {
-        const movie = await prisma.movie.findMany()
-        response.json(movie)
-      } catch (error) {
-        response.json(400)
-      }
+      async findAll (request:Request, response:Response)  {
+        try {
+          const movie = await prisma.movie.findMany()
+          response.json(movie)
+        } catch (error) {
+          response.json(400)
+        }
 
-    }
+      }
 
       async findOne(request:Request, response:Response){
         try {
