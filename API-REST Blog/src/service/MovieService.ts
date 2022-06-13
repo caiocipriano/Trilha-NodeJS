@@ -1,7 +1,6 @@
 import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
-import { request } from 'http'
 
 const prisma = new PrismaClient()
 const app = express()
@@ -34,7 +33,6 @@ export class MovieService{
         } catch (error) {
           throw new AppError("Erro na requisição")
         }
-
       }
 
 
