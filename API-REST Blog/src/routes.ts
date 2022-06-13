@@ -1,63 +1,14 @@
 import { Router } from 'express';
-import { celebrate, Joi, Segments } from 'celebrate';
 
-//Imports do controller
-import { MovieController } from './contollers/MovieController';
-import { CategorieController } from './contollers/CategorieController';
+//Imports
+import movieRoutes from "./routes/movieRoutes"
+import categorieRoutes from "./routes/categorieRoutes"
 
 const router = Router();
 
-const movieController = new MovieController()
-const categorieController = new CategorieController()
 
-router.get("/movies", movieController.findAll)
-
-router.get("/movie/:id",
-                celebrate({
-                    [Segments.PARAMS]:{
-                        id:Joi.number().required(),
-                    }
-                }),movieController.findOne)
-
-                
-router.post("/movie", movieController.insertMovie)
-
-router.put("/movie/:id", 
-                celebrate({
-                    [Segments.PARAMS]:{
-                          id:Joi.number().required(),
-                    }
-                }),movieController.updateMovie)
-
-router.delete("/movie/:id",
-                celebrate({
-                    [Segments.PARAMS]:{
-                        id:Joi.number().required(),
-                    }
-                }), movieController.deleteMovie)
-
-router.get("/categories", categorieController.findAll)
-
-router.get("/categorie/:id",celebrate({
-                    [Segments.PARAMS]:{
-                        id:Joi.number().required(),
-                    }
-                }), categorieController.findOne)
-router.post("/categorie", categorieController.insertCategorie)
-
-router.put("/categorie/:id",
-                celebrate({
-                    [Segments.PARAMS]:{
-                        id:Joi.number().required(),
-                    }
-                }),categorieController.updateCategorie)
-
-router.delete("/categorie/:id",
-                celebrate({
-                    [Segments.PARAMS]:{
-                        id:Joi.number().required(),
-                    }
-                }), categorieController.deleteCategorie)
+router.use("/movies", movieRoutes)
+router.use("/categories", categorieRoutes)
 
 
 export {router};
