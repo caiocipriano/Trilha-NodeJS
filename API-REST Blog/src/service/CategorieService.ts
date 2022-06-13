@@ -25,7 +25,7 @@ export class CategorieService{
           })
 
           if(!categorie){
-            throw new AppError("Categoria não encontrado ou não existe")
+            response.json("Categoria não encontrada ou não existe")
           }
           response.json(categorie)
         } catch (error) {
@@ -40,7 +40,7 @@ export class CategorieService{
           let categorie = await prisma.categorie.findUnique({where:{name}})
 
           if(categorie){
-            throw new AppError("Categoria não encontrado ou não existe")
+            response.json("Categoria já Existe")
           }
 
           categorie = await prisma.categorie.create({data:{name}})
@@ -60,7 +60,7 @@ export class CategorieService{
         let categorie = await prisma.categorie.findUnique({where:{id:Number(id)}})
 
         if(!categorie){
-          throw new AppError("Categoria não encontrado ou não existe")
+          response.json("Categoria não encontrada ou não existe")
         }
 
         categorie = await prisma.categorie.update({
@@ -80,7 +80,7 @@ export class CategorieService{
           const categorie= await prisma.categorie.findUnique({where:{id:Number(id)}})
 
            if(!categorie){
-            throw new AppError("Categoria não encontrado ou não existe")
+            response.json("Categoria não encontrada ou não existe")
            }
 
           await prisma.categorie.delete({ where:{id:Number(id)}})

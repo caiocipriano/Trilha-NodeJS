@@ -21,3 +21,12 @@ model Movie {
     categorie Categorie @relation(fields: [categorieID], references: [id])
     categorieID Int
 }
+
+model User {
+    Id Int @id @default(autoincrement()) 
+    name String 
+    email String @unique
+    password String
+  //  categorie Categorie @relation(fields: [categorieID], references: [id])
+}
+

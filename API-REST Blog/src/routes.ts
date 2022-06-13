@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
-import 'express-async-erros';
 
 //Imports do controller
 import { MovieController } from './contollers/MovieController';
@@ -39,8 +38,7 @@ router.delete("/movie/:id",
 
 router.get("/categories", categorieController.findAll)
 
-router.get("/categorie/:id",
-                celebrate({
+router.get("/categorie/:id",celebrate({
                     [Segments.PARAMS]:{
                         id:Joi.number().required(),
                     }

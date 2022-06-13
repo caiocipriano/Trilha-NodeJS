@@ -27,7 +27,7 @@ export class MovieService{
           })
 
           if(!movie){
-            throw new AppError("Filme não encontrado ou não existe")
+            response.json("Filme não encontrado ou não existe")
           }
           response.json(movie)
         } catch (error) {
@@ -43,7 +43,7 @@ export class MovieService{
           let movie = await prisma.movie.findUnique({where:{title}})
 
           if(movie){
-            throw new AppError("Filme não encontrado ou não existe")
+            response.json("Filme já cadastrado")
           }
 
           movie = await prisma.movie.create({
@@ -69,7 +69,7 @@ export class MovieService{
         let movie = await prisma.movie.findUnique({where:{Id:Number(id)}})
 
         if(!movie){
-          throw new AppError("Filme não encontrado ou não existe")
+          response.json("Filme não encontrado ou não existe")
         }
 
 
@@ -95,7 +95,7 @@ export class MovieService{
           const movie= await prisma.movie.findUnique({where:{Id:Number(id)}})
 
            if(!movie){
-            throw new AppError("Filme não encontrado ou não existe")
+            response.json("Filme não encontrado ou não existe")
            }
 
           await prisma.movie.delete({ where:{Id:Number(id)}})
