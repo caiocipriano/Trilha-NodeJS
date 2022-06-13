@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
+import { AppError } from '../error/appError'
 
 const prisma = new PrismaClient()
 const app = express()
@@ -12,9 +13,8 @@ export class CategorieService{
           const categorie = await prisma.categorie.findMany()
           response.json(categorie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
-
       }
 
       async findOne(request:Request, response:Response){
@@ -25,11 +25,11 @@ export class CategorieService{
           })
 
           if(!categorie){
-            response.json("Categoria não encontrada ou não existe")
+            throw new AppError("Categoria não encontrado ou não existe")
           }
           response.json(categorie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
       }
 
@@ -40,7 +40,7 @@ export class CategorieService{
           let categorie = await prisma.categorie.findUnique({where:{name}})
 
           if(categorie){
-            return response.json({error:"Categoria não encontrada ou não existe"})
+            throw new AppError("Categoria não encontrado ou não existe")
           }
 
           categorie = await prisma.categorie.create({data:{name}})
@@ -48,7 +48,7 @@ export class CategorieService{
           response.json(categorie)
           } 
         catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
       }
 
@@ -60,7 +60,7 @@ export class CategorieService{
         let categorie = await prisma.categorie.findUnique({where:{id:Number(id)}})
 
         if(!categorie){
-          return response.json({error:"Categoria não encontrada ou não existe"})
+          throw new AppError("Categoria não encontrado ou não existe")
         }
 
         categorie = await prisma.categorie.update({
@@ -69,7 +69,7 @@ export class CategorieService{
             })
         response.json(categorie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
         
       }
@@ -80,12 +80,12 @@ export class CategorieService{
           const categorie= await prisma.categorie.findUnique({where:{id:Number(id)}})
 
            if(!categorie){
-            return response.json({ error: "Categoria não encontrada ou não existe" });
+            throw new AppError("Categoria não encontrado ou não existe")
            }
 
           await prisma.categorie.delete({ where:{id:Number(id)}})
         } catch (error) {
-           response.json(400)
+          throw new AppError("Erro na requisição")
         }
             
       }

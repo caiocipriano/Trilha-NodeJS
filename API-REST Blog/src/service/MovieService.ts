@@ -1,3 +1,4 @@
+import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
 import { request } from 'http'
@@ -15,9 +16,8 @@ export class MovieService{
           const movie = await prisma.movie.findMany()
           response.json(movie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
-
       }
 
       async findOne(request:Request, response:Response){
@@ -28,11 +28,11 @@ export class MovieService{
           })
 
           if(!movie){
-            response.json("Filme não encontrado ou não existe")
+            throw new AppError("Filme não encontrado ou não existe")
           }
           response.json(movie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
 
       }
@@ -45,7 +45,7 @@ export class MovieService{
           let movie = await prisma.movie.findUnique({where:{title}})
 
           if(movie){
-            return response.json({error:"Título do filme já cadastrado"})
+            throw new AppError("Filme não encontrado ou não existe")
           }
 
           movie = await prisma.movie.create({
@@ -58,7 +58,7 @@ export class MovieService{
           })
           response.json(movie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
       }
 
@@ -71,7 +71,7 @@ export class MovieService{
         let movie = await prisma.movie.findUnique({where:{Id:Number(id)}})
 
         if(!movie){
-          return response.json({error:"Filme não encontrado ou não existe"})
+          throw new AppError("Filme não encontrado ou não existe")
         }
 
 
@@ -86,7 +86,7 @@ export class MovieService{
         })
         response.json(movie)
         } catch (error) {
-          response.json(400)
+          throw new AppError("Erro na requisição")
         }
         
       }
@@ -97,16 +97,14 @@ export class MovieService{
           const movie= await prisma.movie.findUnique({where:{Id:Number(id)}})
 
            if(!movie){
-            return response.json({ error: "Filme não encontrado ou não existe" });
+            throw new AppError("Filme não encontrado ou não existe")
            }
 
           await prisma.movie.delete({ where:{Id:Number(id)}})
         } catch (error) {
-           response.json(400)
-        }
-            
+           throw new AppError("Erro na requisição")
+        } 
       }
-
 }
 
 
