@@ -9,7 +9,7 @@ const router = Router();
 
 const userController = new UserController()
 
-router.get("/", isAuthenticated, userController.findAll)
+router.get("/",isAuthenticated ,userController.findAll)
 
 
 router.get("/:id",celebrate({

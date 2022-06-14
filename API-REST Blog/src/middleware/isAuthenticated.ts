@@ -14,7 +14,7 @@ export default function isAuthenticated(
             response.json("Token JWT inválido")
         }
 
-        const [, token] = authHeader.split(' '); 
+        const [, token]= authHeader.split(' '); 
 
         try {
             const decodeToken = verify(token, auth.jwt.secret)

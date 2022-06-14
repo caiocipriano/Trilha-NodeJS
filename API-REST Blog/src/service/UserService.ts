@@ -2,6 +2,7 @@ import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
 import { hash } from 'bcrypt';
+import { getRedis } from '../lib/cache';
 
 const prisma = new PrismaClient()
 const app = express()
@@ -21,11 +22,15 @@ export class UserService{
       async findOne(request:Request, response:Response){
         try {
           const {id} = request.params
-          const user = await prisma.user.findFirst({
+
+          const userRedis = await getRedis(`user-${id}`)
+          const user =JSON.parse(userRedis)
+
+          const userFinded = await prisma.user.findFirst({
               where:{Id:Number(id)}
           })
 
-          if(!user){
+          if(!userFinded){
             response.json("Usuário não encontrado ou não existe")
           }
           response.json(user)
