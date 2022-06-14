@@ -3,12 +3,13 @@ import { celebrate, Joi, Segments } from 'celebrate';
 
 
 import { UserController } from '../contollers/UserController';
+import isAuthenticated from '../middleware/isAuthenticated';
 
 const router = Router();
 
 const userController = new UserController()
 
-router.get("/users", userController.findAll)
+router.get("/", isAuthenticated, userController.findAll)
 
 
 router.get("/:id",celebrate({

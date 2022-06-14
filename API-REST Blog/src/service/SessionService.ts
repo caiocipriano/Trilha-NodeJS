@@ -1,8 +1,12 @@
-import { UserService } from './UserService';
-import { AppError } from './../error/appError';
+
 import { PrismaClient } from '@prisma/client'
-import express, { Request, Response }  from 'express'
+import express, { Response }  from 'express'
 import { compare } from 'bcrypt';
+import {sign} from 'jsonwebtoken'
+
+
+import { UserService } from './UserService';
+import auth from '../config/auth';
 
 const prisma = new PrismaClient()
 const app = express()
@@ -25,6 +29,13 @@ async createSession(email:any,password:any, response:Response){
       if(!passwordConfirmed){
         response.json("Email / Senha estão incorretos")
       }
-      return user
+
+      const token = sign({}, auth.jwt.secret, {
+        subject:user.email,
+        expiresIn:auth.jwt.expiresIn
+      })
+
+
+      return {user,token}
   }
 }

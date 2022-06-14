@@ -12,7 +12,6 @@ const router = Router();
 router.use("/movies", movieRoutes)
 router.use("/categories", categorieRoutes)
 router.use("/users", userRoutes)
-
 router.use("/session",sessionsRouter)
 
 
