@@ -8,7 +8,7 @@ export class SessionController{
     
         const createSession = new SessionService();
     
-        const user = await createSession.createSession(email,password);
+        const user = await createSession.createSession(email,password,response);
 
         return response.json((user));
       }

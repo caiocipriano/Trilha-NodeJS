@@ -11,19 +11,19 @@ app.use(express.json())
 
 
 export class SessionService{
-async createSession(email:any,password:any){ 
+async createSession(email:any,password:any, response:Response){ 
     const userService = new UserService()   
 
       const user = await userService.findByEmail(email)
         
       if(!user){
-        throw new AppError("Erro na requisição",401)
+        response.json("Email não encontrado")
       }
 
       const passwordConfirmed = await compare(password, user.password)
 
       if(!passwordConfirmed){
-        throw new AppError("Erro na requisição",404)
+        response.json("Email / Senha estão incorretos")
       }
       return user
   }
