@@ -1,6 +1,7 @@
 import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient()
 const app = express()
@@ -33,6 +34,21 @@ export class UserService{
         }
       }
 
+      async findByEmail(email:string){
+        try {
+          const user = await prisma.user.findUnique({
+              where:{email}
+          })
+
+          if(!user){
+            throw new AppError("Erro na requisição")
+          }
+          return user
+        } catch (error) {
+          throw new AppError("Erro na requisição")
+        }
+      }
+
 
       async insertUser(request:Request, response:Response){
         try {
@@ -44,11 +60,13 @@ export class UserService{
             response.json("Email já cadastrado")
           }
 
+          const hashed = await hash(password, 8)
+
           user = await prisma.user.create({
               data:{
                 name,
                 email,
-                password
+                password:hashed
               }
           })
           response.json(user)

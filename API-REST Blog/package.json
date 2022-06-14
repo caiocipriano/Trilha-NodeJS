@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/caiocipriano/API-REST-MyBlog#readme",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.41",
     "prisma": "^3.15.1",
