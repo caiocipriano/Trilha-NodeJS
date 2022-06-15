@@ -36,7 +36,7 @@ async createSession(email:any,password:any, response:Response){
         expiresIn:auth.jwt.expiresIn
       })
 
-      await setRedis(`user-${user.Id}`, JSON.stringify(user))
+      //await setRedis(`user-${user.Id}`, JSON.stringify(user))
 
       return {user,token}
   }

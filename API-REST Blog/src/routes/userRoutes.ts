@@ -12,7 +12,7 @@ const userController = new UserController()
 router.get("/",isAuthenticated ,userController.findAll)
 
 
-router.get("/:id",celebrate({
+router.get("/:id",isAuthenticated,celebrate({
     [Segments.PARAMS]:{
         id:Joi.number().required(),}
 }),userController.findOne)

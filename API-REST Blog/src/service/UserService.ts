@@ -23,9 +23,9 @@ export class UserService{
         try {
           const {id} = request.params
 
-          const userRedis = await getRedis(`user-${id}`)
-          const user =JSON.parse(userRedis)
-
+          /*const userRedis = await getRedis(`user-${id}`)
+          const stringUserRedis = String(userRedis) 
+          const user =JSON.parse(stringUserRedis)*/
           const userFinded = await prisma.user.findFirst({
               where:{Id:Number(id)}
           })
@@ -33,7 +33,7 @@ export class UserService{
           if(!userFinded){
             response.json("Usuário não encontrado ou não existe")
           }
-          response.json(user)
+          response.json(userFinded)
         } catch (error) {
           throw new AppError("Erro na requisição")
         }

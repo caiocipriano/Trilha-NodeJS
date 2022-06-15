@@ -14,6 +14,7 @@ export default function isAuthenticated(
             response.json("Token JWT inválido")
         }
 
+        if(authHeader){        
         const [, token]= authHeader.split(' '); 
 
         try {
@@ -23,4 +24,5 @@ export default function isAuthenticated(
         } catch (error) {
             response.json("Token JWT Inválido")
         }
+    }
 }
