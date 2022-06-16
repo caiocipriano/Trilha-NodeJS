@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { Movie, PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
 
 import { AppError } from './../error/appError';
@@ -12,12 +12,18 @@ app.use(express.json())
 //Filmes
 //Listando todos os Filmes e a categoria é exibida com o id
 export class MovieService{
-      async findAll (request:Request, response:Response)  {
+      async findAll (request:Request, response:Response) {
         try {
           const redisCache= new RedisCache()
-          const movie = await prisma.movie.findMany()
-          await redisCache.save('teste','teste')
-          response.json(movie)
+
+          let movies = await redisCache.recover<Movie[]>('api-blog-MOVIES_LIST')
+
+          if(!movies){
+             movies = await prisma.movie.findMany()
+
+            await redisCache.save('api-blog-MOVIES_LIST',movies)
+          }
+          response.json(movies)
         } catch (error) {
           throw new AppError("Erro na requisição")
         }
@@ -26,6 +32,7 @@ export class MovieService{
       async findOne(request:Request, response:Response){
         try {
           const {id} = request.params
+          const redisCache= new RedisCache()
           const movie = await prisma.movie.findFirst({
               where:{Id:Number(id)},include:{categorie:true}
           })
@@ -33,6 +40,9 @@ export class MovieService{
           if(!movie){
             response.json("Filme não encontrado ou não existe")
           }
+
+          await redisCache.save('api-blog-MOVIES_LIST',movie)
+
           response.json(movie)
         } catch (error) {
           throw new AppError("Erro na requisição")
@@ -50,6 +60,9 @@ export class MovieService{
             response.json("Filme já cadastrado")
           }
 
+          const redisCache= new RedisCache()
+          await redisCache.invalidate('api-blog-MOVIES_LIST')
+
           movie = await prisma.movie.create({
               data:{
                   title,
@@ -58,6 +71,7 @@ export class MovieService{
                   categorie:{connect:{name:nameTitle}}
               }
           })
+
           response.json(movie)
         } catch (error) {
           throw new AppError("Erro na requisição")
@@ -75,7 +89,8 @@ export class MovieService{
         if(!movie){
           response.json("Filme não encontrado ou não existe")
         }
-
+        const redisCache= new RedisCache()
+        await redisCache.invalidate('api-blog-MOVIES_LIST')
 
          movie = await prisma.movie.update({
             where:{Id:Number(id)},
@@ -100,7 +115,10 @@ export class MovieService{
 
            if(!movie){
             response.json("Filme não encontrado ou não existe")
-           }
+           }    
+          const redisCache= new RedisCache()
+           await redisCache.invalidate('api-blog-MOVIES_LIST')
+ 
 
           await prisma.movie.delete({ where:{Id:Number(id)}})
         } catch (error) {

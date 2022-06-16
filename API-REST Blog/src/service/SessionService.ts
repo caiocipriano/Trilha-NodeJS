@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client'
 import express, { Response }  from 'express'
 import { compare } from 'bcrypt';
 import {sign} from 'jsonwebtoken'
-import { setRedis } from '../config/cache';
 
 
 import { UserService } from './UserService';
@@ -36,7 +35,6 @@ async createSession(email:any,password:any, response:Response){
         expiresIn:auth.jwt.expiresIn
       })
 
-      //await setRedis(`user-${user.Id}`, JSON.stringify(user))
 
       return {user,token}
   }

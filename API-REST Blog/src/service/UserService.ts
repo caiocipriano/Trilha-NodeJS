@@ -1,8 +1,8 @@
+
 import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
 import { hash } from 'bcrypt';
-import { getRedis } from '../config/cache';
 
 const prisma = new PrismaClient()
 const app = express()
@@ -18,7 +18,6 @@ export class UserService{
           throw new AppError("Erro na requisição")
         }
       }
-
       async findOne(request:Request, response:Response){
         try {
           const {id} = request.params

@@ -8,7 +8,7 @@ const router = Router();
 
 const movieController = new MovieController()
 
-router.get("/movies", movieController.findAll)
+router.get("/", movieController.findAll)
 
 
 router.get("/:id",celebrate({
