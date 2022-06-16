@@ -2,7 +2,7 @@ import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
 import { hash } from 'bcrypt';
-import { getRedis } from '../lib/cache';
+import { getRedis } from '../config/cache';
 
 const prisma = new PrismaClient()
 const app = express()

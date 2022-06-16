@@ -1,6 +1,8 @@
-import { AppError } from './../error/appError';
 import { PrismaClient } from '@prisma/client'
 import express, { Request, Response }  from 'express'
+
+import { AppError } from './../error/appError';
+import RedisCache from "../lib/RedisCache"
 
 const prisma = new PrismaClient()
 const app = express()
@@ -12,7 +14,9 @@ app.use(express.json())
 export class MovieService{
       async findAll (request:Request, response:Response)  {
         try {
+          const redisCache= new RedisCache()
           const movie = await prisma.movie.findMany()
+          await redisCache.save('teste','teste')
           response.json(movie)
         } catch (error) {
           throw new AppError("Erro na requisição")

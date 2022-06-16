@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import express, { Response }  from 'express'
 import { compare } from 'bcrypt';
 import {sign} from 'jsonwebtoken'
-import { setRedis } from '../lib/cache';
+import { setRedis } from '../config/cache';
 
 
 import { UserService } from './UserService';

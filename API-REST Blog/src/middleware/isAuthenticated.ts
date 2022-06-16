@@ -1,7 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import { verify, Secret } from 'jsonwebtoken';
-
+import { verify } from 'jsonwebtoken';
 import auth from '../config/auth'
+
+interface TokenPayload {
+    iat: number;
+    exp: number;
+    sub: string;
+  }
 
 export default function isAuthenticated(
     request:Request, 
@@ -19,6 +24,12 @@ export default function isAuthenticated(
 
         try {
             const decodeToken = verify(token, auth.jwt.secret)
+           //{ iat: 1655332862, exp: 1655419262, sub: 'caio@udemy.com' }
+           
+            /*const {sub} = decodeToken as TokenPayload
+            request.user={
+                id:sub
+            }*/
 
             return next()
         } catch (error) {
