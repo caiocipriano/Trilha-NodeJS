@@ -1,0 +1,29 @@
+{
+  "name": "api-rest-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@types/jest": "^28.1.1",
+    "body-parser": "1.18.3",
+    "consign": "0.1.6",
+    "express": "4.16.4",
+    "jest": "^28.1.1",
+    "knex": "0.15.2",
+    "knex-logger": "^0.1.0",
+    "pg": "7.7.1"
+  },
+  "devDependencies": {
+    "supertest": "3.3.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "secure-mode": "jest --watch --verbose=false"
+  },
+  "author": "",
+  "license": "ISC"
+}
