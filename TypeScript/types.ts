@@ -1,1 +1,0 @@
-let isOpne : boolean
