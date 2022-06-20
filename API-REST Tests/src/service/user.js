@@ -1,4 +1,4 @@
-const user = require("../routes/user")
+const ValidationError = require("../errors/ValidationError")
 
 module.exports = (app)=>{
     const findAll = (filter={})=>{
@@ -7,9 +7,9 @@ module.exports = (app)=>{
 
 
     const create = async (req,res) =>{
-        if(!user.name)return {error:"Nome é obrigatorio"}
-        if(!user.email)return {error:"Email é obrigatorio"}
-        if(!user.password)return {error:"Passoword é obrigatorio"}
+        if(!user.name)throw new ValidationError("Nome é obrigatorio")
+        if(!user.email)throw new ValidationError("Email é obrigatorio")
+        if(!user.password)throw new ValidationError("Passoword é obrigatorio")
 
         const userDb = await findAll({user:user.email})
         if(userDb&&userDb.length>0)return{error:"Já existe email"}
