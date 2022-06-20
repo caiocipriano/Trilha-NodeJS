@@ -49,7 +49,7 @@ teste('Não deve autenticar usuario com senhar errada', ()=>{
 })
 
 test('Não deve ascessar a rota sem autenticação',()=>{
-    return request(app).get('/users')
+    return request(app).get('/v1/users')
     .then((res)=>{
         expect(res.status).toBe(401)
     })
