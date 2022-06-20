@@ -1,9 +1,9 @@
 const app = require("../app")
-const accounts = require("../routes/accounts")
+const ValidationError = require("../errors/ValidationError")
 
 module.exports=()=>{
     const save = async(accounts)=>{
-        if(!accounts.name) return {error:"Nome é um atributo obrigatório"}
+        if(!accounts.name) throw new ("Nome é um atributo obrigatório")
         return app.db('accounts').insert(account,'*')
     }
 

@@ -1,5 +1,6 @@
 const request = require('supertest')
 const app = require('../../src/app')
+const jwt = require('jwt-simple')
 
 const MAIN_ROUTE = '/accounts'
 let user;
@@ -7,11 +8,15 @@ let user;
 beforeAll(async()=>{
     const res = await app.service.user.save({name:'UserAccount',email:`${Date.now()}`,password:1234})
     user = {...res[0]}
+    user.token= jwt.encode(user,'Segredo!')
+
 })
 
 test('Deve inserir um usuario com sucesso',()=>{
     return request(app).post(MAIN_ROUTE)
     .send({name:'Acc #1', user_id:user_id})
+    .set('authorization', `bearer ${user.token}`)
+
     .then((result)=>{
         expect(result.status).toBe(201)
         expect(result.body.name).toBe('Acc #1')
@@ -21,6 +26,8 @@ test('Deve inserir um usuario com sucesso',()=>{
 test('Não deve inserir um usuario sem nome',()=>{
     return request(app).post(MAIN_ROUTE)
     .send({ user_id:user_id})
+    .set('authorization', `bearer ${user.token}`)
+
     .then((result)=>{
         expect(result.status).toBe(400)
         expect(result.body.name).toBe('Nome é um atributo obrigatório')
@@ -33,6 +40,8 @@ test('Deve listar  todas as constas',()=>{
     return app.db('accounts')
     .insert({name:'AccList',user_id:user_id})
     .then(()=>request(app).get(MAIN_ROUTE))
+    .set('authorization', `bearer ${user.token}`)
+
     .then((res)=>{
         expect(res.status).toBe(200)
         expect(res.body.length).toBeGreaterThan(0)
@@ -45,6 +54,8 @@ test('Deve listar usuario por ID',()=>{
     return app.db('accounts')
     .insert({name:'AccByID',user_id:user_id},['id'])
     .then(acc=>request(app).get(`${MAIN_ROUTE}/${acc[0].id}`))
+    .set('authorization', `bearer ${user.token}`)
+
     .then((res)=>{
         expect(res.status).toBe(200)
         expect(res.body.name).toBe('AccByID')
@@ -60,6 +71,8 @@ test('Deve alterar uma conta',()=>{
     .insert({name:'AccToUpdat',user_id:user_id},['id'])
     .then(acc=>request(app).put(`${MAIN_ROUTE}/${acc[0].id}`)
     .send({name:'Acc Updated'}))
+    .set('authorization', `bearer ${user.token}`)
+
     .then((res)=>{
         expect(res.status).toBe(200)
         expect(res.body.name).toBe('AccToUptated')
@@ -74,6 +87,8 @@ test('Deve remoover uma conta',()=>{
     .insert({name:'AccDeleted',user_id:user_id},['id'])
     .then(acc=>request(app).delete(`${MAIN_ROUTE}/${acc[0].id}`)
     .send({name:'Acc Deleted'}))
+    .set('authorization', `bearer ${user.token}`)
+
     .then((res)=>{
         expect(res.status).toBe(204)
     })
