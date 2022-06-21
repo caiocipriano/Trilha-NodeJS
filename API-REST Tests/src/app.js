@@ -21,6 +21,7 @@ app.get("/",(req,res)=>{
 app.use((erro,req,res,next)=>{
     const {name, message,stack} = erro
     if(erro === 'ValidationError')res.status(400).json({error:message})
+    if(erro === 'RecursoError')res.status(403).json({error:message})
     else res.status(500).json({name,message,stack})
     next(erro)
 })
