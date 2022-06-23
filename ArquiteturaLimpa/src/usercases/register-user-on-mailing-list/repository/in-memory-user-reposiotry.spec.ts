@@ -4,18 +4,25 @@ import { UserData } from './../user-data';
 describe('In memory User Repository',()=>{
     test('deve retornar nulo se usuario não existir', async()=>{
         const users:UserData[]=[]
-        const userRepo = new InMemoryUserRepository(users)
-        const user = await userRepo.findUserByEmail('any@email.com')
+        const sut = new InMemoryUserRepository(users)
+        const user = await sut.findUserByEmail('any@email.com')
         expect(user).toBeNull()
 
     })
-    test('deve retorna usuario encontrada no repository', async()=>{
+    test('deve retorna usuario pelo email encontrada no repository', async()=>{
         const users:UserData[]=[]
         const name= "any_name"
         const email="any@wmail.com"
-        const userRepo= new InMemoryUserRepository(users)
-        const user = await userRepo.findUserByEmail(email)
-        await userRepo.add({name,email})
+        const sut= new InMemoryUserRepository(users)
+        const user = await sut.findUserByEmail(email)
+        await sut.add({name,email})
         expect(user.name).toBe('any_name')
+    })
+    test('deve retornar todos usuario do repository', async ()=>{
+        const users:UserData[]=[{name:'any_name',email:'any@email.com'},
+        {name:'second_name',email:'second@email.com'}]
+        const sut= new InMemoryUserRepository(users)
+        const returnedUsers = sut.findAllUser()
+        expect((await returnedUsers).length).toBe(2)
     })
 })
