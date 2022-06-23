@@ -19,4 +19,11 @@ describe('',()=>{
         const error = User.create({name:invalideName,email:'any@email.com'})
         expect(error).toEqual(left(new InvalidNameError()))
     })
+    test('deve criar usuario valido',()=>{
+        const validName = 'any_name'
+        const validEmail = 'any@email.com'
+        const user:User = User.create({name:validName,email:validEmail}).value as User
+        expect(user.name.value).toEqual(validName)
+        expect(user.email.value).toEqual(validEmail)
+    })
 })
