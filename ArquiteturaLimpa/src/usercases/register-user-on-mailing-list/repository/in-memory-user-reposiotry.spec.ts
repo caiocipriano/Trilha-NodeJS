@@ -1,5 +1,5 @@
 import { InMemoryUserRepository } from './in-memory-user-repository';
-import { UserData } from './../user-data';
+import { UserData } from '../../../entites/user-data';
 
 describe('In memory User Repository',()=>{
     test('deve retornar nulo se usuario não existir', async()=>{

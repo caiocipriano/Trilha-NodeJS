@@ -17,6 +17,10 @@ describe('validando emails',()=>{
         const email ='l'.repeat(65)+'@email.com'
         expect(Email.validate(email)).toBeFalsy()
     })
+    test('não deve aceitar dominio do email com mais de 255 carac',()=>{
+        const email ='local@'+'d'.repeat(128)+'.'+'d'.repeat(127)
+        expect(Email.validate(email)).toBeFalsy()
+    })
     test('não deve aceitar email com mais de 320 carac',()=>{
         const email ='l'.repeat(64)+'@'+'d'.repeat(128)+'.'+'d'.repeat(127)
         expect(Email.validate(email)).toBeFalsy()

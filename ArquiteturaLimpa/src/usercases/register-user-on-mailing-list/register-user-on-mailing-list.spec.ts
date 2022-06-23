@@ -1,4 +1,4 @@
-import { UserData } from './user-data';
+import { UserData } from '../../entites/user-data';
 
 describe('',()=>{
     test('deve resigistrar usuario n alista de emails', async()=>{

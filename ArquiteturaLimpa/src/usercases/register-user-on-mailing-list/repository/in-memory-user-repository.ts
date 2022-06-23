@@ -1,4 +1,4 @@
-import { UserData } from '../user-data';
+import { UserData } from '../../../entites/user-data';
 import { UserRepository } from './../ports/user-repository';
 
 
