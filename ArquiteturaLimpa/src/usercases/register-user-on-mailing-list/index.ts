@@ -1,0 +1,1 @@
+export * from './registe-user-on-mailing-list'

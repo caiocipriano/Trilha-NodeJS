@@ -1,5 +1,5 @@
-import { UserData } from '../../../entites/user-data';
-import { UserRepository } from './../ports/user-repository';
+import { UserData } from '../../../../src/entites/user-data';
+import { UserRepository } from '../../../../src/usercases/register-user-on-mailing-list/ports/user-repository';
 
 
 export class InMemoryUserRepository implements UserRepository{

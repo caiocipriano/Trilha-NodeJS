@@ -1,5 +1,5 @@
 import { InvalidNameError } from './errors/invalid-name-error';
-import { left, Either, right } from './../shared/either';
+import { left, Either, right } from '../shared/either';
 
 export class Name{
     public readonly value:string
@@ -10,7 +10,7 @@ export class Name{
 
     public static create(name:string){
         if(!Name.validate(name)){//Se email for valido, cria
-            return left(new InvalidNameError())
+            return left(new InvalidNameError(name))
         }
         return right(new Name(name))
     }

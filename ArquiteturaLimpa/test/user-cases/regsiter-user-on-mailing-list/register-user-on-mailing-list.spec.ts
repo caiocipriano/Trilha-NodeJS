@@ -1,10 +1,7 @@
-import { InvalidEmailError } from './../../entites/errors/invalid-email-error';
-import { InvalidNameError } from '../../entites/errors/invalid-name-error';
-import { UserData } from '../../entites/user-data';
-import { UserRepository } from './ports/user-repository';
-import { RegisterUserOnMailingList } from './registe-user-on-mailing-list';
+import { UserData } from '../../../src/entites/user-data';
+import { UserRepository } from '../../../src/usercases/register-user-on-mailing-list/ports/user-repository';
+import { RegisterUserOnMailingList } from '../../../src/usercases/register-user-on-mailing-list/registe-user-on-mailing-list';
 import { InMemoryUserRepository } from './repository/in-memory-user-repository';
-import { left } from '../../shared/either';
 
 describe('',()=>{
     test('deve resigistrar usuario na lista de emails', async()=>{

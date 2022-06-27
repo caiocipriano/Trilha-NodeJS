@@ -1,5 +1,5 @@
 import { InvalidEmailError } from './errors/invalid-email-error';
-import { right, left } from './../shared/either';
+import { right, left } from '../shared/either';
 export class Email{
     public readonly value:string
 
@@ -11,7 +11,7 @@ export class Email{
         if(Email.create(email)){//Se email for valido, cria
             return right(new Email(email))
         }
-        return left(new InvalidEmailError())
+        return left(new InvalidEmailError(email))
     }
 
 
