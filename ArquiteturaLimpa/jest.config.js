@@ -4,5 +4,9 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverageFrom:[
     '!**/config/**'
-  ]
+  ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@test/(.*)$': '<rootDir>/test/$1'
+  }
 };

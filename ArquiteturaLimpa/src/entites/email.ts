@@ -1,5 +1,5 @@
-import { InvalidEmailError } from './errors/invalid-email-error';
-import { right, left } from '../shared/either';
+import { InvalidEmailError } from '@/entites/errors';
+import { right, left } from '@/shared';
 export class Email{
     public readonly value:string
 

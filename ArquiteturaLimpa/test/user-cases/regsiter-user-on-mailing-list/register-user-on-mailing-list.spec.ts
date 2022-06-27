@@ -1,7 +1,7 @@
-import { UserData } from '../../../src/entites/user-data';
-import { UserRepository } from '../../../src/usercases/register-user-on-mailing-list/ports/user-repository';
-import { RegisterUserOnMailingList } from '../../../src/usercases/register-user-on-mailing-list/registe-user-on-mailing-list';
-import { InMemoryUserRepository } from './repository/in-memory-user-repository';
+import { UserData } from '@/entites';
+import { UserRepository } from '@/usercases/register-user-on-mailing-list/ports';
+import { RegisterUserOnMailingList } from '@/usercases/register-user-on-mailing-list';
+import { InMemoryUserRepository } from './repository';
 
 describe('',()=>{
     test('deve resigistrar usuario na lista de emails', async()=>{

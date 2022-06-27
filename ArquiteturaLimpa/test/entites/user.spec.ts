@@ -1,7 +1,4 @@
-import { left } from '../../src/shared/either';
-import { InvalidEmailError } from '../../src/entites/errors/invalid-email-error';
-import { InvalidNameError } from '../../src/entites/errors/invalid-name-error';
-import { User } from "../../src/entites/user"
+import { User } from "@/entites"
 
 describe('',()=>{
     test('',()=>{

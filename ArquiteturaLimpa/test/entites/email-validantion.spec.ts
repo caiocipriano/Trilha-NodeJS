@@ -1,4 +1,4 @@
-import { Email } from "../../src/entites/email"
+import { Email } from "@/entites"
 
 describe('validando emails',()=>{
     test('não deve aceitar email nulo',()=>{

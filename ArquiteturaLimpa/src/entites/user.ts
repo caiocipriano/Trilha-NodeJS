@@ -1,10 +1,6 @@
-import { right } from '../shared/either';
-import { InvalidNameError } from './errors/invalid-name-error';
-import { Email } from './email';
-import { Either,left } from '../shared/either';
-import { InvalidEmailError } from './errors/invalid-email-error';
-import { UserData } from './user-data';
-import { Name } from './name';
+import { InvalidNameError,InvalidEmailError } from '@/entites/errors';
+import { Either,left,right } from '@/shared';
+import { UserData,Name,Email} from '@/entites/';
 
 export class User{
     public readonly name:Name

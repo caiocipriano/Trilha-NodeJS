@@ -1,5 +1,5 @@
-import { InvalidNameError } from './errors/invalid-name-error';
-import { left, Either, right } from '../shared/either';
+import { InvalidNameError } from '@/entites/errors';
+import { left, right } from '@/shared';
 
 export class Name{
     public readonly value:string
