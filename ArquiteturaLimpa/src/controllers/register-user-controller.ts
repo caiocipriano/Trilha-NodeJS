@@ -28,6 +28,5 @@ export class RegisterUserController{
         } catch (error) {
             return serverError(error)
         }
-
     }
 }
