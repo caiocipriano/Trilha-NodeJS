@@ -15,8 +15,8 @@ export class MongodbUserRepository implements UserRepository{
         const result = await userCollection.findOne({email:email})
         return result
     }
-    findAllUser(): Promise<UserData[]> {
-        throw new Error('Method not implemented.');
+    async findAllUser(): Promise<UserData[]> {
+        return await MongoHelper.getCollection('users').find().toArray()
     }
     async exist(user: UserData): Promise<boolean> {
         const result = await this.findUserByEmail(user.email)
