@@ -3,7 +3,7 @@ import { MongodbUserRepository } from "@/external/repository/mongodb/mongodb-use
 
 describe('',()=>{
     beforeAll(async () => {
-        await MongoHelper.connect(process.env.MONGO_URL)
+        await MongoHelper.connect('localhost:27017')
     })
 
     afterAll(async () => {
