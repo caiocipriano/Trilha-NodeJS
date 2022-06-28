@@ -11,7 +11,7 @@ describe('', ()=>{
         await MongoHelper.disconnect()    
     })
     beforeEach(async () => {
-        MongoHelper.clearCollection('user')
+        await MongoHelper.clearCollection('user')
     })
     test('', async()=>{
         app.post('/test_cors',(req,res)=>{
