@@ -1,5 +1,5 @@
 import { Express } from "express";
-import {bodyParse,contentType,cors} from '@/main/config/middleware/'
+import {bodyParse,contentType,cors} from '@/main/middleware'
 
 export default (app:Express):void =>{
     app.use(bodyParse)

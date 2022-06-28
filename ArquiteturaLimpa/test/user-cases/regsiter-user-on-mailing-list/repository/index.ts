@@ -1,1 +1,1 @@
-export * from './in-memory-user-repository'
+export * from '../../../../src/usercases/register-user-on-mailing-list/repository/in-memory-user-repository'
