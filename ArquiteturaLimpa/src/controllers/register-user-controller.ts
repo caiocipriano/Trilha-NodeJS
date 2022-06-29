@@ -4,7 +4,7 @@ import { HttpRequest,HttpResponse } from '@/controllers/ports';
 import { UserData } from '@/entites';
 import { badRequest, created, serverError } from './util/http-helper';
 
-export class RegisterUserController{
+export class RegisterAndSendEmailController{
     private readonly usercase:UseCase
 
     constructor(usercase:UseCase){
