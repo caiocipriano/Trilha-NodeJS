@@ -1,6 +1,7 @@
 import { Either, left, right } from "@/shared";
 import { MailServiceError } from "@/usercases/errors/mail-service-error";
 import { EmailOptions, EmailService } from "@/usercases/send-email/ports/email-service";
+import * as nodemailer from 'nodemailer'
 
 export class NodemailerEmailService implements EmailService{
     async send (options: EmailOptions): Promise<Either<MailServiceError, EmailOptions>> {
