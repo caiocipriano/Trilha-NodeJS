@@ -10,7 +10,7 @@ export class RegisterAndSendEmail implements UseCase{
     private registerUserOnMailingList: RegisterUserOnMailingList
     private sendEmail: SendEmail
   
-    constructor (registerUserOnMailingList: RegisterUserOnMailingList, sendEmail: SendEmail) {
+    constructor (registerUserOnMailingList: RegisterUserOnMailingList, sendEmail: SendEmail){
       this.registerUserOnMailingList = registerUserOnMailingList
       this.sendEmail = sendEmail
     }
