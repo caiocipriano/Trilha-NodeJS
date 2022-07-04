@@ -3,9 +3,9 @@ import { SessionData } from '../../entites/session-data';
 import { Session } from '../../entites/session';
 import { UseCase } from '../ports/use-case';
 
-export class InsertUser implements UseCase{
+export class InsertSession implements UseCase{
     private readonly sessionRepo:SessionRepository
-    private constructor(sessionRepo:SessionRepository){
+    constructor(sessionRepo:SessionRepository){
         this.sessionRepo=sessionRepo
     }
     public async perform(request:Session):Promise<SessionData>{
