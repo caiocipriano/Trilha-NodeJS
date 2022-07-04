@@ -1,7 +1,7 @@
 import { left, right } from './../shared/either';
 import { InvalideMovieError } from "./errors/invalide-movie-error";
 
-export class Movie{
+export class Title{
     public readonly value:string;
 
     constructor(movie:string){
@@ -9,10 +9,10 @@ export class Movie{
     }
 
     public static create(movie:string){
-        if(!Movie.validation(movie)){
+        if(!Title.validation(movie)){
             return left(new InvalideMovieError(movie))
         }
-        return right(new Movie(movie))
+        return right(new Title(movie))
     }
 
     public static validation(movie:string):boolean{
