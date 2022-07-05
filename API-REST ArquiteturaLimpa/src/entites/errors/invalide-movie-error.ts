@@ -1,6 +1,6 @@
-export class InvalideMovieError extends Error{
-    private readonly value="InvalidMovieError"
+export class InvalideTitleError extends Error{
+    private readonly value="InvalidTitleError"
     constructor(movie:string){
-        super(movie="Invalide Movie")
+        super(movie="Invalide Title")
     }
 }

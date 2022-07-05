@@ -1,5 +1,5 @@
-import { left, right } from './../shared/either';
-import { InvalideMovieError } from "./errors/invalide-movie-error";
+import { left, right } from '../shared/either';
+import { InvalideTitleError } from "./errors/invalide-movie-error";
 
 export class Title{
     public readonly value:string;
@@ -10,7 +10,7 @@ export class Title{
 
     public static create(movie:string){
         if(!Title.validation(movie)){
-            return left(new InvalideMovieError(movie))
+            return left(new InvalideTitleError(movie))
         }
         return right(new Title(movie))
     }

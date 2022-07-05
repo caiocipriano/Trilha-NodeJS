@@ -1,11 +1,11 @@
 import { Session } from './../../../src/entites/session';
 import { SessionData } from "../../../src/entites/session-data"
-import { InsertSession } from "../../../src/usecases/insert-user/insert-session"
-import { SessionRepository } from "../../../src/usecases/insert-user/ports/session-repository"
-import { InMemorySessionRepository } from "../../../src/usecases/insert-user/repository/in-memory-session-repository"
+import { InsertSession } from "../../../src/usecases/insert-session/insert-session"
+import { SessionRepository } from "../../../src/usecases/insert-session/ports/session-repository"
+import { InMemorySessionRepository } from "../../../src/usecases/insert-session/repository/in-memory-session-repository"
 
 describe('',()=>{
-    test('should add user with complete data to mailing list', async () => {
+    test('', async () => {
         const sessions: SessionData[] = []
         const repo: SessionRepository = new InMemorySessionRepository(sessions)
         const usecase: InsertSession = new InsertSession(repo)

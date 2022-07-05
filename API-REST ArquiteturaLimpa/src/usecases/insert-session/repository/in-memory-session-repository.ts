@@ -1,5 +1,5 @@
 import { SessionData } from '../../../entites/session-data';
-import { SessionRepository } from './../ports/session-repository';
+import { SessionRepository } from '../ports/session-repository';
 
 
 export class InMemorySessionRepository implements SessionRepository{

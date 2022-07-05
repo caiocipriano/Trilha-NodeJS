@@ -1,4 +1,4 @@
-import { SessionData } from './../../../entites/session-data';
+import { SessionData } from '../../../entites/session-data';
 //Classe com prisma
 export interface SessionRepository{
     create(session:SessionData):Promise<void>
