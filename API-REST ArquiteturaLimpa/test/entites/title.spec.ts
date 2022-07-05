@@ -2,13 +2,6 @@ import { SessionData } from "../../src/entites/session-data"
 import { InMemorySessionRepository } from "../../src/usecases/insert-session/repository/in-memory-session-repository"
 
 describe('Validação dos dados',()=>{
-    test('deve retornar nulo se title não existir', async()=>{
-        const sessions:SessionData[]=[]
-        const sut = new InMemorySessionRepository(sessions)
-        const session = await sut.findByMovieName('TopGun')
-        expect(session).toBeNull()
-
-    })
     test('deve retorna sessão pelo titulo encontrado no repository', async()=>{
         const sessions:SessionData[]=[]
         const title= "TopGun"
