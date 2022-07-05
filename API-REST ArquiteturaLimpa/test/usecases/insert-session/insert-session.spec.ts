@@ -5,7 +5,7 @@ import { SessionRepository } from "../../../src/usecases/insert-session/ports/se
 import { InMemorySessionRepository } from "../../../src/usecases/insert-session/repository/in-memory-session-repository"
 
 describe('',()=>{
-    test('', async () => {
+    test('Deve criar uma sessão', async () => {
         const sessions: SessionData[] = []
         const repo: SessionRepository = new InMemorySessionRepository(sessions)
         const usecase: InsertSession = new InsertSession(repo)

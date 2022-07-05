@@ -15,7 +15,7 @@ export class Title{
         return right(new Title(movie))
     }
 
-    public static validation(movie:string):boolean{
+    public static validation(movie:string|null):boolean{ //Nulo para validação no test
         if(!movie){
             return false
         }
