@@ -4,12 +4,11 @@ import { HttpRequest } from '../../controller/ports';
 
 
 export const adaptRoute = (controller:SessionController)=>{
-    return async (req:Request,response:Response)=>{
+    return async (request:Request,response:Response)=>{
         const httpRequest:HttpRequest={
-            body:req.body
-            
+            body:request.body
         }
-        const httpResponse = await controller.handle(httpRequest)
-        response.status(httpResponse.statusCode).json(httpResponse.body)
+        const httpResponse = await controller.handle(httpRequest) //Resposta é a requisição
+        response.status(httpResponse.statusCode).json(httpResponse.body)//Capturar o Status
     }
 }

@@ -1,4 +1,4 @@
-import { HttpResponse } from '@/controllers/ports/http-response';
+import { HttpResponse } from "../ports"
 
 
 export const created = (data:any):HttpResponse=>({

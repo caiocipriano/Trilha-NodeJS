@@ -5,21 +5,21 @@ import { MissingParamError } from './errors/missing-param-error';
 import { badRequest, created, serverError } from './util/http-helper';
 
 export class SessionController{
-    private readonly usercase:UseCase
+    private readonly usecase:UseCase
 
     constructor(usercase:UseCase){
-        this.usercase=usercase
+        this.usecase=usercase
     }
 
     public async handle(request:HttpRequest):Promise<HttpResponse>{
         try {
-            if(!(request.body.name)|| !(request.body.email)){
+            if(!(request.body.title)||!(request.body.genre)){
                 return badRequest (new MissingParamError('Some empty field'))
             }
-            const userData:SessionData=request.body
-            const response = await this.usercase.perform(userData)
+            const sessionData:SessionData=request.body
+            const response = await this.usecase.perform(sessionData)
     
-            if(response.isLeft()){
+            if(!response){
                 return badRequest(response.value)
             }
             return created(response)
